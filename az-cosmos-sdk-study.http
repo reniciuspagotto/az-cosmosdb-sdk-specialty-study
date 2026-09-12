@@ -1,0 +1,119 @@
+@host = http://localhost:5196
+@productId = replace-with-generated-id
+@category = Accessories
+@continuationToken = replace-with-continuation-token
+
+### Create product
+POST {{host}}/products
+Content-Type: application/json
+
+{
+	"name": "Mechanical Keyboard 109",
+	"category": "Accessories",
+	"price": 129.99,
+	"quantity": 25,
+	"tags": [
+		"peripherals",
+		"mechanical",
+		"office"
+	]
+}
+
+###
+### Create products in batch for one category
+POST {{host}}/products/batch
+Content-Type: application/json
+
+{
+	"category": "Accessories",
+	"products": [
+		{
+			"name": "Mechanical Keyboard 200",
+			"price": 199.99,
+			"quantity": 10,
+			"tags": [
+				"peripherals",
+				"mechanical"
+			]
+		},
+		{
+			"name": "Ergonomic Mouse 50",
+			"price": 89.99,
+			"quantity": 40,
+			"tags": [
+				"peripherals",
+				"wireless"
+			]
+		}
+	]
+}
+
+###
+### List all products
+GET {{host}}/products
+Accept: application/json
+
+###
+### List next 20 products
+GET {{host}}/products?continuationToken={{continuationToken}}
+Accept: application/json
+
+###
+### Get product by id
+GET {{host}}/products/{{productId}}?category={{category}}
+Accept: application/json
+
+###
+### Update product
+PUT {{host}}/products/{{productId}}?category={{category}}
+Content-Type: application/json
+
+{
+	"name": "Mechanical Keyboard 109 Pro",
+	"price": 149.99,
+	"quantity": 20,
+	"tags": [
+		"peripherals",
+		"mechanical",
+		"wireless"
+	]
+}
+
+###
+### Batch update product price
+POST {{host}}/products/batch/update-price
+Content-Type: application/json
+
+{
+	"price": 159.99,
+	"items": [
+		{
+			"id": "replace-with-first-id",
+			"category": "Accessories"
+		},
+		{
+			"id": "replace-with-second-id",
+			"category": "Accessories"
+		}
+	]
+}
+
+###
+### Logical delete product
+DELETE {{host}}/products/{{productId}}?category={{category}}
+Accept: application/json
+
+###
+### Permanently delete product
+DELETE {{host}}/products/{{productId}}/hard?category={{category}}
+Accept: application/json
+
+###
+### Expire product in 30 seconds
+POST {{host}}/products/{{productId}}/expire?category={{category}}
+Accept: application/json
+
+###
+### Delete all products in a partition
+DELETE {{host}}/products/partition/{{category}}
+Accept: application/json

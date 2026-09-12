@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/AzCosmosSdk.Api/AzCosmosSdk.Api.csproj" />
+  <Project Path="src/AzCosmosSdk.BulkInsert/AzCosmosSdk.BulkInsert.csproj" />
+  <Project Path="src/AzCosmosSdk.ChangeFeed/AzCosmosSdk.ChangeFeed.csproj" />
+</Solution>
